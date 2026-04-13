@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Study Schedule</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #38bdf8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #334155;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background: #1e293b;
+    }
+
+    tr.completed {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    .done {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>📅 Study Dashboard</h1>
+
+<!-- TABLE -->
+<table id="schedule">
+<tr>
+<th>Done</th>
+<th>Date</th>
+<th>Exam</th>
+<th>Assignment</th>
+<th>DS</th>
+<th>Other</th>
+</tr>
+
+<tr><td><input type="checkbox" onchange="saveRow(this,0)"></td><td>13</td><td></td><td>DE (4 files) + WD (notes) + DS (3)</td><td></td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,1)"></td><td>14</td><td></td><td>DE (4 files) + OOPS (5 questions) + DS</td><td></td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,2)"></td><td>15</td><td></td><td>OOPS (5 questions) + DS (remaining)</td><td></td><td></td></tr>
+
+<tr><td><input type="checkbox" onchange="saveRow(this,3)"></td><td>16</td><td></td><td></td><td>DS (50)</td><td>DE (1/2)</td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,4)"></td><td>17</td><td></td><td></td><td>DS (50)</td><td>WD (1/2)</td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,5)"></td><td><b>18</b></td><td></td><td></td><td>DS (50)</td><td>DE (1/2)</td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,6)"></td><td><b>19</b></td><td></td><td></td><td>DS (50)</td><td>WD (1/2)</td></tr>
+
+<tr><td><input type="checkbox" onchange="saveRow(this,7)"></td><td>20</td><td>WD</td><td></td><td>DS (150)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,8)"></td><td>21</td><td>DS</td><td></td><td></td><td>DE (Full)</td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,9)"></td><td>22</td><td>DE</td><td></td><td></td><td>OOPS (Full)</td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,10)"></td><td>23</td><td>OOPS</td><td></td><td></td><td>CS (Full)</td></tr>
+
+<tr><td><input type="checkbox" onchange="saveRow(this,11)"></td><td>24</td><td>CS</td><td></td><td>DS (100)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,12)"></td><td><b>25</b></td><td></td><td></td><td>DS (200)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,13)"></td><td><b>26</b></td><td></td><td></td><td>DS (200)</td><td></td></tr>
+
+<tr><td><input type="checkbox" onchange="saveRow(this,14)"></td><td>27</td><td></td><td></td><td>DS (200)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,15)"></td><td>28</td><td></td><td></td><td>DS (200)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,16)"></td><td>29</td><td></td><td></td><td>DS (200)</td><td></td></tr>
+<tr><td><input type="checkbox" onchange="saveRow(this,17)"></td><td>30</td><td></td><td></td><td>DS (200)</td><td></td></tr>
+</table>
+
+<!-- SUBJECTS -->
+<div class="card">
+<h2>Subjects</h2>
+<div id="subjects"></div>
+</div>
+
+<!-- TODO -->
+<div class="card">
+<h2>To Do</h2>
+<div id="todo"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // ===== TABLE CHECKBOXES =====
+  const rows = document.querySelectorAll("#schedule tr");
+
+  rows.forEach((row, i) => {
+    if (i === 0) return; // skip header
+
+    const checkbox = row.querySelector("input");
+    const key = "row_" + (i - 1);
+
+    // Load saved state
+    const saved = localStorage.getItem(key);
+    if (saved === "true") {
+      checkbox.checked = true;
+      row.classList.add("completed");
+    }
+
+    // Save on change
+    checkbox.addEventListener("change", () => {
+      localStorage.setItem(key, checkbox.checked);
+      row.classList.toggle("completed", checkbox.checked);
+    });
+  });
+
+
+  // ===== LIST FUNCTION =====
+  function createList(id, items) {
+    const container = document.getElementById(id);
+
+    items.forEach((text, i) => {
+      const key = id + "_" + i;
+      const checked = localStorage.getItem(key) === "true";
+
+      const div = document.createElement("div");
+
+      const label = document.createElement("label");
+      label.className = checked ? "done" : "";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = checked;
+
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(key, checkbox.checked);
+        label.classList.toggle("done", checkbox.checked);
+      });
+
+      label.appendChild(checkbox);
+      label.append(" " + text);
+      div.appendChild(label);
+      container.appendChild(div);
+    });
+  }
+
+  // ===== INIT LISTS =====
+  createList("subjects", ["WD","DS","DE","OOPS","Maths","CS"]);
+
+  createList("todo", [
+    "WD Notes",
+    "OOPS 10 questions",
+    "DE File",
+    "DS File"
+  ]);
+
+});
+</script>
+
+</body>
+</html>
