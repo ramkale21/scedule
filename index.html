@@ -10,14 +10,13 @@
       padding: 20px;
     }
 
-    h1, h2 {
+    h1 {
       color: #38bdf8;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 30px;
     }
 
     th, td {
@@ -40,153 +39,103 @@
       cursor: pointer;
     }
 
-    .done {
-      text-decoration: line-through;
-      opacity: 0.6;
+    .weekend {
+    color: #facc15;
+    font-weight: 600;
     }
 
-    .card {
-      background: #1e293b;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+    .weekend b {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid rgba(250, 204, 21, 0.4);
+    border-radius: 999px;
     }
-  </style>
+
+</style>
 </head>
 
 <body>
 
 <h1>📅 Study Dashboard</h1>
+<h2 id="counter">Days Remaining: 0</h2>
 
-<!-- TABLE -->
 <table id="schedule">
 <tr>
 <th>Done</th>
 <th>Date</th>
 <th>Exam</th>
-<th>Assignment</th>
 <th>DS</th>
 <th>Other</th>
 </tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,0)"></td><td><b>18</b></td><td></td><td></td><td>25</td><td>DE</td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,1)"></td><td><b>19</b></td><td></td><td></td><td>25</td><td>WD</td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>25</b></td><td></td><td>100</td><td>DE</td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>26</b></td><td></td><td>150</td><td>DE</td></tr>
+<tr><td><input type="checkbox"></td><td>27</td><td></td><td>250</td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>28</td><td></td><td>250</td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>29</td><td></td><td>250</td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>30</td><td></td><td>250</td><td></td></tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,2)"></td><td>20</td><td>WD</td><td></td><td>25</td><td>WD/DE</td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,3)"></td><td>21</td><td>DS</td><td></td><td>25</td><td>DS/DE</td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,4)"></td><td>22</td><td>DE</td><td></td><td>25</td><td>DE/OOPS</td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,5)"></td><td>23</td><td>OOPS</td><td></td><td>25</td><td>OOPS</td></tr>
+<tr><td><input type="checkbox"></td><td>1</td><td></td><td></td><td>Maths</td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>2</b></td><td></td><td></td><td>Maths</td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>3</b></td><td></td><td></td><td>Maths</td></tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,6)"></td><td>24</td><td>CS</td><td></td><td>190</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,7)"></td><td><b>25</b></td><td></td><td></td><td>190</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,8)"></td><td><b>26</b></td><td></td><td></td><td>190</td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>4</td><td>Maths</td><td></td><td>DE</td></tr>
+<tr><td><input type="checkbox"></td><td>5</td><td></td><td></td><td>DE</td></tr>
+<tr><td><input type="checkbox"></td><td>6</td><td>DE</td><td></td><td>DS</td></tr>
+<tr><td><input type="checkbox"></td><td>7</td><td></td><td></td><td>DS</td></tr>
+<tr><td><input type="checkbox"></td><td>8</td><td>DS</td><td></td><td>CS</td></tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,9)"></td><td>27</td><td></td><td></td><td>190</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,10)"></td><td>28</td><td></td><td></td><td>190</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,11)"></td><td>29</td><td></td><td></td><td>190</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,12)"></td><td>30</td><td></td><td></td><td>190</td><td></td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>9</b></td><td></td><td></td><td>WD</td></tr>
+<tr><td><input type="checkbox"></td><td class="weekend"><b>10</b></td><td></td><td></td><td>CS</td></tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,13)"></td><td>1</td><td></td><td></td><td>25</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,14)"></td><td><b>2</b></td><td></td><td></td><td>25</td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,15)"></td><td><b>3</b></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><input type="checkbox"></td><td>11</td><td>CS</td><td></td><td>WD</td></tr>
+<tr><td><input type="checkbox"></td><td>12</td><td></td><td></td><td>WD</td></tr>
+<tr><td><input type="checkbox"></td><td>13</td><td>WD</td><td></td><td>OOPS</td></tr>
+<tr><td><input type="checkbox"></td><td>14</td><td></td><td></td><td>OOPS</td></tr>
+<tr><td><input type="checkbox"></td><td>15</td><td>OOPS</td><td></td><td></td></tr>
 
-<tr><td><input type="checkbox" onchange="saveRow(this,16)"></td><td>4</td><td>Maths</td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,17)"></td><td>5</td><td></td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,18)"></td><td>6</td><td>DE</td><td></td><td></td><td></td></tr>
-
-<tr><td><input type="checkbox" onchange="saveRow(this,19)"></td><td>7</td><td></td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,20)"></td><td>8</td><td>DS</td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,21)"></td><td><b>9</b></td><td></td><td></td><td></td><td></td></tr>
-
-<tr><td><input type="checkbox" onchange="saveRow(this,22)"></td><td><b>10</b></td><td></td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,23)"></td><td>11</td><td>CS</td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,24)"></td><td>12</td><td></td><td></td><td></td><td></td></tr>
-
-<tr><td><input type="checkbox" onchange="saveRow(this,25)"></td><td>13</td><td>WD</td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,26)"></td><td>14</td><td></td><td></td><td></td><td></td></tr>
-<tr><td><input type="checkbox" onchange="saveRow(this,27)"></td><td>15</td><td>OOPS</td><td></td><td></td><td></td></tr>
 </table>
-
-<!-- SUBJECTS -->
-<div class="card">
-<h2>Subjects</h2>
-<div id="subjects"></div>
-</div>
-
-<!-- TODO -->
-<div class="card">
-<h2>To Do</h2>
-<div id="todo"></div>
-</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  // ===== TABLE CHECKBOXES =====
   const rows = document.querySelectorAll("#schedule tr");
+  const counter = document.getElementById("counter");
+
+  function updateCounter() {
+    let remaining = 0;
+
+    rows.forEach((row, i) => {
+      if (i === 0) return; // skip header
+      const checkbox = row.querySelector("input");
+      if (!checkbox.checked) remaining++;
+    });
+
+    counter.textContent = "Days Remaining: " + remaining;
+  }
 
   rows.forEach((row, i) => {
-    if (i === 0) return; // skip header
+    if (i === 0) return;
 
     const checkbox = row.querySelector("input");
     const key = "row_" + (i - 1);
 
-    // Load saved state
     const saved = localStorage.getItem(key);
     if (saved === "true") {
       checkbox.checked = true;
       row.classList.add("completed");
     }
 
-    // Save on change
     checkbox.addEventListener("change", () => {
       localStorage.setItem(key, checkbox.checked);
       row.classList.toggle("completed", checkbox.checked);
+      updateCounter(); // 🔥 update on click
     });
   });
 
-
-  // ===== LIST FUNCTION =====
-  function createList(id, items) {
-    const container = document.getElementById(id);
-
-    items.forEach((text, i) => {
-      const key = id + "_" + i;
-      const checked = localStorage.getItem(key) === "true";
-
-      const div = document.createElement("div");
-
-      const label = document.createElement("label");
-      label.className = checked ? "done" : "";
-
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = checked;
-
-      checkbox.addEventListener("change", () => {
-        localStorage.setItem(key, checkbox.checked);
-        label.classList.toggle("done", checkbox.checked);
-      });
-
-      label.appendChild(checkbox);
-      label.append(" " + text);
-      div.appendChild(label);
-      container.appendChild(div);
-    });
-  }
-
-  // ===== INIT LISTS =====
-  createList("subjects", ["WD","DS","DE","OOPS","Maths","CS"]);
-
-  createList("todo", [
-    "WD Notes",
-    "OOPS 10 questions",
-    "DE File",
-    "DS File"
-  ]);
+  updateCounter(); // 🔥 initial load
 
 });
 </script>
-
 </body>
 </html>
